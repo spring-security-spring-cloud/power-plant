@@ -3,12 +3,11 @@ package com.powerledger.powerplant.controller;
 import com.powerledger.powerplant.component.ServiceResponse;
 import com.powerledger.powerplant.config.RabbitMQConfig;
 import com.powerledger.powerplant.dto.BatteryDTO;
-import com.powerledger.powerplant.exception.DataNotFoundException;
+import com.powerledger.powerplant.exception.APIException;
 import com.powerledger.powerplant.service.BatteryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
-import org.springframework.amqp.core.MessageBuilder;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,8 +46,8 @@ public class BatteryController {
         try{
             Map<String, Object> data = batteryService.getListByRange(lowerRange, upperRange);
             return new ResponseEntity<>(new ServiceResponse("data found", data), HttpStatus.OK);
-        } catch (DataNotFoundException dnfe) {
-            throw dnfe;
+        } catch (APIException apie) {
+            throw new APIException("Data not found");
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(new ServiceResponse("Unable to get Battery information", null), HttpStatus.INTERNAL_SERVER_ERROR);
