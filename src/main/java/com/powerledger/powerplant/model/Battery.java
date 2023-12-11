@@ -23,4 +23,10 @@ public class Battery extends Auditable {
     private String postcode;
 
     private Integer capacity;
+
+    public Battery(String name, String postcode, int capacity) {
+        this.name = name;
+        this.postcode = postcode;
+        this.capacity = capacity;
+    }
 }

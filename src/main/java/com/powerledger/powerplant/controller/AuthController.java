@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
-    @Autowired
+    /*@Autowired
     AuthenticationManager authenticationManager;
 
     @Autowired
@@ -114,5 +114,5 @@ public class AuthController {
         user.setRoles(roles);
         userRepository.save(user);
         return new ResponseEntity<>(new ServiceResponse("User registered successfully!", null), HttpStatus.OK);
-    }
+    }*/
 }
